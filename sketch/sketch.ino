@@ -54,13 +54,21 @@ long ping(){
   
 }
 
+int look(){
+  // TODO: move rangefinder left and right and check distances
+  // if L > R return L else return R
+  return 1;
+}
+
 void avoid(){
   halt();
-  delay(10);
-  motorL.run(RELEASE);
-  motorR.run(BACKWARD);
+  if (look() == 1){
+    motorR.run(BACKWARD);
+  } else {
+    motorL.run(BACKWARD);
+  }
   delay(50);
-  motorR.run(RELEASE);
+  halt();
 }
 
 void loop(){

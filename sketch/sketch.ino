@@ -54,6 +54,15 @@ long ping(){
   
 }
 
+void avoid(){
+  halt();
+  delay(10);
+  motorL.run(RELEASE);
+  motorR.run(BACKWARD);
+  delay(50);
+  motorR.run(RELEASE);
+}
+
 void loop(){
   
   long distance;
@@ -62,12 +71,7 @@ void loop(){
   distance = ping();
   
   if (distance < 20) {
-    halt();
-    delay(10);
-    motorL.run(RELEASE);
-    motorR.run(BACKWARD);
-    delay(50);
-    motorR.run(RELEASE);
+    avoid();
   } else {
     forward();
   }

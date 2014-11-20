@@ -1,4 +1,5 @@
 #include <AFMotor.h>
+#include <Servo.h>
 
 // define pins for rangefinder
 #define peepPin A0
@@ -7,12 +8,18 @@
 // define motors
 AF_DCMotor motorL(1, MOTOR12_64KHZ);
 AF_DCMotor motorR(2, MOTOR12_64KHZ);
+Servo servo1;
 
 void setup(){
   
   // set pin modes for ping
   pinMode(peepPin, OUTPUT);
   pinMode(echoPin, INPUT);
+  
+  // attach servo
+  servo1.attach(9);
+  // look straight ahead
+  servo1.write(90);
   
   // set motor speed
   motorL.setSpeed(200);
@@ -55,9 +62,19 @@ long ping(){
 }
 
 int look(){
-  // TODO: move rangefinder left and right and check distances
+  
+  // move rangefinder left and right and check distances
+  servo1.write(120);
+  long distanceL = ping();
+  servo1.write(60);
+  long distanceR = ping();
+
   // if L > R return L else return R
-  return 1;
+  if (distanceL > distanceR){
+    return 0;
+  } else {
+    return 1;
+  }
 }
 
 void avoid(){

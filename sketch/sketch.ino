@@ -65,10 +65,14 @@ int look(){
   
   // move rangefinder left and right and check distances
   servo1.write(120);
+  delay(500);
   long distanceL = ping();
+  delayMicroseconds(20);
   servo1.write(60);
+  delay(500);
   long distanceR = ping();
-
+  delayMicroseconds(20);
+  servo1.write(90);
   // if L > R return L else return R
   if (distanceL > distanceR){
     return 0;
@@ -84,7 +88,7 @@ void avoid(){
   } else {
     motorL.run(BACKWARD);
   }
-  delay(50);
+  delay(500);
   halt();
 }
 

@@ -12,6 +12,8 @@ Servo servo1;
 
 void setup(){
   
+  Serial.begin(9600);
+  
   // set pin modes for ping
   pinMode(peepPin, OUTPUT);
   pinMode(echoPin, INPUT);
@@ -73,6 +75,10 @@ int look(){
   long distanceR = ping();
   delayMicroseconds(20);
   servo1.write(90);
+  
+  Serial.print(distanceL);
+  Serial.print(" : ");
+  Serial.println(distanceR);
   // if L > R return L else return R
   if (distanceL > distanceR){
     return 0;
@@ -99,10 +105,14 @@ void loop(){
   // check for obstacles
   distance = ping();
   
+  Serial.println(distance);
+  
   if (distance < 20) {
     avoid();
   } else {
     forward();
   }
+  
+  delay(1000);
   
 }

@@ -100,10 +100,14 @@ void avoid(){
 
 void loop(){
   
-  long distance;
+  long distance = 0;
   
   // check for obstacles
-  distance = ping();
+  for(int i = 0;i < 3; i++){
+    distance += ping();
+  }
+  
+  distance = distance / 3;
   
   Serial.println(distance);
   

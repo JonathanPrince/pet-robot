@@ -111,7 +111,7 @@ void loop(){
   
   Serial.println(distance);
   
-  if (distance < 20) {
+  if (distance < 30) {
     avoid();
   } else {
     forward();
